@@ -1,10 +1,11 @@
 package metriccalc
 
 import (
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
-	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
+
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/stretchr/testify/require"
 )
 
 func TestMetricCalcOne(t *testing.T) {

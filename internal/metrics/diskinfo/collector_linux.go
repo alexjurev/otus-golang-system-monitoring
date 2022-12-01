@@ -3,21 +3,15 @@ package diskinfo
 import (
 	"fmt"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/executor"
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"strconv"
 	"strings"
 	"time"
-	"unicode"
+	"unicode" //nolint
 )
 
 const (
 	command = "iostat"
-)
-
-const (
-	tpsColumn    = 0
-	rSpeedColumn = 1
-	wSpeedColumn = 2
 )
 
 func (c Collector) Available() bool {
@@ -97,7 +91,6 @@ func indexToSearch(output string) int {
 		}
 		if isNewWord && !unicode.IsSpace([]rune(output)[i+1]) && unicode.IsDigit([]rune(output)[i+1]) {
 			return i + 1
-			break
 		}
 	}
 	return 0

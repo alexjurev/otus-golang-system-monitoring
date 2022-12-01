@@ -1,7 +1,7 @@
 package diskinfo
 
 import (
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"time"
 )
 

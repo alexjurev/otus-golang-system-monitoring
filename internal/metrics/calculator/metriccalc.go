@@ -1,7 +1,7 @@
 package metriccalc
 
 import (
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	log "github.com/sirupsen/logrus"
 	"time"
 )

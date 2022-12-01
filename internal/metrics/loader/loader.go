@@ -3,7 +3,8 @@ package metricloader
 import (
 	"errors"
 	"fmt"
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/cpu"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/diskinfo"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/loadaverage"

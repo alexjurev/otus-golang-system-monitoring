@@ -3,7 +3,7 @@ package loadaverage
 import (
 	"fmt"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/executor"
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"strconv"
 	"strings"
 	"time"

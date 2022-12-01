@@ -3,6 +3,7 @@ package cpu
 import (
 	"fmt"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/executor"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"strconv"
 	"strings"
 	"time"

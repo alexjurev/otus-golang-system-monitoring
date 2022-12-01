@@ -5,7 +5,7 @@ package metriccalc
 
 import (
 	"context"
-	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics" //nolint
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"

@@ -2,9 +2,10 @@ package metriccalc
 
 import (
 	"container/list"
-	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"sync"
 	"time"
+
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 )
 
 type groupCalc struct {
