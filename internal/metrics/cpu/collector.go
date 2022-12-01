@@ -13,7 +13,7 @@ const (
 	idleTimeMetricName   = "idle-time"
 )
 
-type metricData struct {
+type metricData struct { //nolint
 	SystemTime float64
 	UserTime   float64
 	IdleTime   float64
@@ -31,7 +31,7 @@ func (c Collector) GroupName() string {
 	return groupName
 }
 
-func toGroup(t time.Time, m metricData) metric.Group {
+func toGroup(t time.Time, m metricData) metric.Group { //nolint
 	return metric.Group{
 		Name: groupName,
 		Time: t,

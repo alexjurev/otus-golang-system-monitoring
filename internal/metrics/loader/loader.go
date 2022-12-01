@@ -5,7 +5,9 @@ import (
 	"fmt"
 	metric "github.com/alexjurev/otus-golang-system-monitoring/internal/metrics"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/cpu"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/diskinfo"
 	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/loadaverage"
+	"github.com/alexjurev/otus-golang-system-monitoring/internal/metrics/spaceinfo"
 )
 
 type Config struct {
@@ -16,6 +18,8 @@ type Config struct {
 type Metric struct {
 	Cpu         *bool
 	LoadAverage *bool
+	DiskInfo    *bool
+	SpaceInfo   *bool
 }
 
 var ErrCollectorNotAvailable = errors.New("collector is not available")
@@ -35,6 +39,19 @@ func Load(config Config) ([]metric.Collector, error) {
 			return nil, err
 		}
 	}
+	if config.Collect.DiskInfo == nil || *config.Collect.DiskInfo {
+		collectors, err = appendCollector(collectors, diskinfo.Collector{}, config.IgnoreUnavailable)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if config.Collect.SpaceInfo == nil || *config.Collect.SpaceInfo {
+		collectors, err = appendCollector(collectors, spaceinfo.Collector{}, config.IgnoreUnavailable)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	return collectors, nil
 }
 

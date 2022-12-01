@@ -23,7 +23,7 @@ func init() {
 	flag.StringVar(&port, "port", "8006", "connection port")
 	flag.StringVar(&avgInterval, "avgInterval", "5", "interval to calc average (sec)")
 	flag.StringVar(&notifyInterval, "notifyInterval", "5", "interval to get notifications (sec)")
-	flag.StringVar(&metricName, "metricName", "cpu", "metric name to collect")
+	flag.StringVar(&metricName, "metricName", "spaceinfo", "metric name to collect")
 	log.SetFormatter(&log.TextFormatter{})
 	log.SetOutput(os.Stdout)
 	log.SetLevel(log.WarnLevel)

@@ -10,4 +10,7 @@ metrics:
   collect:
     cpu: true
     loadAverage: true
+    diskInfo: true
+    connInfo: true
+    spaceInfo: true
 
