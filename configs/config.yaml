@@ -1,0 +1,17 @@
+server:
+  host: 127.0.0.1
+  port: 8006
+
+logger:
+  level: "DEBUG"
+
+metrics:
+  ignoreUnavailable: true
+  collect:
+    cpu: true
+    loadAverage: true
+    diskInfo: true
+    connInfo: true
+    spaceInfo: true
+
+
