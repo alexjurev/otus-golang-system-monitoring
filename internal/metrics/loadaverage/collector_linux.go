@@ -54,15 +54,15 @@ func parse(output string, m *metricData) error {
 		parts[i] = strings.Trim(part, ",")
 	}
 
-	m.Minute1, err = strconv.ParseFloat(strings.Trim(parts[minute1Column], " "), 64)
+	m.Minute1, err = strconv.ParseFloat(strings.TrimSpace(parts[minute1Column]), 64)
 	if err != nil {
 		return fmt.Errorf("failed to parse metric '%s' (%s): %w", minute1MetricName, parts[minute1Column], metric.ErrParseFailed)
 	}
-	m.Minute5, err = strconv.ParseFloat(strings.Trim(parts[minute5Column], " "), 64)
+	m.Minute5, err = strconv.ParseFloat(strings.TrimSpace(parts[minute5Column]), 64)
 	if err != nil {
 		return fmt.Errorf("failed to parse metric '%s' (%s): %w", minute5MetricName, parts[minute5Column], metric.ErrParseFailed)
 	}
-	m.Minute15, err = strconv.ParseFloat(strings.Trim(parts[minute15Column], " "), 64)
+	m.Minute15, err = strconv.ParseFloat(strings.TrimSpace(parts[minute15Column]), 64)
 	if err != nil {
 		return fmt.Errorf("failed to parse metric '%s' (%s): %w", minute15MetricName, parts[minute15Column], metric.ErrParseFailed)
 	}

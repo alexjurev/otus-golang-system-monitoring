@@ -14,6 +14,5 @@ message MetricGroup {
 
 message Metric {
   string name = 1;
-  google.protobuf.Timestamp timestamp = 2;
-  double value = 3;
+  double value = 2;
 }

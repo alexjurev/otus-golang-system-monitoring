@@ -32,20 +32,36 @@ func TestMain(m *testing.M) {
 
 func TestServerIncorrectArgument(t *testing.T) {
 	startServer(t)
+	type testCase struct {
+		name string
+		req  *api.GetMetricsRequest
+	}
 
-	testCases := []*api.GetMetricsRequest{
-		{NotifyInterval: 0, AverageCalcInterval: 0},
-		{NotifyInterval: 1, AverageCalcInterval: -1},
-		{NotifyInterval: -1, AverageCalcInterval: 1},
-		{NotifyInterval: -1, AverageCalcInterval: -1},
+	testCases := []testCase{
+		{
+			name: "NotifyInterval: 0, AverageCalcInterval: 0",
+			req:  &api.GetMetricsRequest{NotifyInterval: 0, AverageCalcInterval: 0},
+		},
+		{
+			name: "NotifyInterval: 1, AverageCalcInterval: -1",
+			req:  &api.GetMetricsRequest{NotifyInterval: 1, AverageCalcInterval: -1},
+		},
+		{
+			name: "NotifyInterval: -1, AverageCalcInterval: 1",
+			req:  &api.GetMetricsRequest{NotifyInterval: -1, AverageCalcInterval: 1},
+		},
+		{
+			name: "NotifyInterval: -1, AverageCalcInterval: -1",
+			req:  &api.GetMetricsRequest{NotifyInterval: -1, AverageCalcInterval: -1},
+		},
 	}
 	for _, tc := range testCases {
-		t.Run(t.Name(), func(t *testing.T) {
+		t.Run(tc.name, func(t *testing.T) {
 			client := createClient(t)
 			ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*300)
 			defer cancel()
 
-			r, err := client.GetMetrics(ctx, tc)
+			r, err := client.GetMetrics(ctx, tc.req)
 			require.NoError(t, err)
 
 			_, err = r.Recv()

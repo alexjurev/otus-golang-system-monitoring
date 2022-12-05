@@ -58,12 +58,8 @@ func newTable(group *api.MetricGroup) (*table, error) {
 
 		t.columnsIndexes[m.GetName()] = i
 	}
-	if _, err := header.WriteString("|\n"); err != nil {
-		return nil, err
-	}
-	if _, err := lineTemplate.WriteString("|\n"); err != nil {
-		return nil, err
-	}
+	header.WriteString("|\n")
+	lineTemplate.WriteString("|\n")
 
 	t.header = header.String()
 	t.lineTemplate = lineTemplate.String()

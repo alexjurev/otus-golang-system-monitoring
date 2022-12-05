@@ -47,7 +47,7 @@ func parse(output string, m *metricData) error {
 
 	m.TPS, err = strconv.ParseFloat(tps, 64)
 	if err != nil {
-		return fmt.Errorf("failed to parse metric '%s' (%s): %w", tpsMetricName, "tps", metric.ErrParseFailed)
+		return fmt.Errorf("failed to parse metric '%s' (%s): %w %s %s", tpsMetricName, "tps", metric.ErrParseFailed, output, tps)
 	}
 
 	m.RSpeed, err = strconv.ParseFloat(rSpeed, 64)
@@ -83,9 +83,20 @@ func findMetric(output string, firstIndex int) (string, int) {
 }
 
 func indexToSearch(output string) int {
+	if output == "" {
+		return 0
+	}
 	blkIndex := strings.Index(output, "Blk_wrtn")
+	dscdIndex := strings.Index(output, "loop0")
+	finalIndex := 0
+	if blkIndex != -1 {
+		finalIndex = blkIndex
+	}
+	if dscdIndex != -1 {
+		finalIndex = dscdIndex
+	}
 	var isNewWord bool
-	for i := blkIndex; i < len(output); i++ {
+	for i := finalIndex; i < len(output); i++ {
 		if unicode.IsSpace([]rune(output)[i]) {
 			isNewWord = true
 		}
@@ -93,5 +104,6 @@ func indexToSearch(output string) int {
 			return i + 1
 		}
 	}
+
 	return 0
 }

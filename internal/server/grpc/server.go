@@ -37,8 +37,11 @@ type Server struct {
 }
 
 func NewServer(config Config, collectors []metric.Collector) *Server {
-	return &Server{addr: net.JoinHostPort(config.Host, strconv.Itoa(config.Port)), collectors: collectors,
-		calc: metriccalc.NewCalculator(collectors)}
+	return &Server{
+		addr:       net.JoinHostPort(config.Host, strconv.Itoa(config.Port)),
+		collectors: collectors,
+		calc:       metriccalc.NewCalculator(collectors),
+	}
 }
 
 func (s *Server) Start() error {
@@ -105,9 +108,8 @@ func toApiMetrics(groups []metric.Group) []*api.MetricGroup {
 		apiGroups = append(apiGroups, &apiGroup)
 		for i, m := range group.Metrics {
 			apiGroup.Metrics[i] = &api.Metric{
-				Name:      m.Name,
-				Timestamp: timestamppb.New(m.Time),
-				Value:     m.Value,
+				Name:  m.Name,
+				Value: m.Value,
 			}
 		}
 	}

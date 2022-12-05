@@ -41,7 +41,6 @@ func parse(output string, m *metricData) error {
 	// Mem: 1848560K used, 194504K free, 20064K shrd, 22332K buff, 479880K cached
 	// CPU:  15% usr   0% sys   0% nic  85% idle   0% io   0% irq   0% sirq
 
-	var err error
 	lines := strings.Split(output, "\n")
 	if len(lines) < 2 {
 		return fmt.Errorf("incorrect output from '%s': %w", command, metric.ErrParseFailed)
@@ -65,6 +64,7 @@ func parse(output string, m *metricData) error {
 	for i := 1; i < len(elems); i++ {
 		elems[i] = strings.Replace(elems[i], ",", "", 1)
 		elems[i] = strings.Replace(elems[i], "%", "", 1)
+		var err error
 		switch {
 		case elems[i] == "us" || elems[i] == "usr":
 			m.UserTime, err = strconv.ParseFloat(elems[i-1], 64)

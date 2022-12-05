@@ -15,13 +15,13 @@ build-img:
 	docker build \
 		--build-arg=LDFLAGS="$(LDFLAGS)" \
 		-t $(DOCKER_IMG) \
-		-f build/Dockerfile .
+		-f build/Dockerfile.dockerfile .
 
 build-img-client:
 	docker build \
 		--build-arg=LDFLAGS="$(LDFLAGS_CLIENTS)" \
 		-t $(DOCKER_IMG_CLIENT) \
-		-f build/Dockerfile-client .
+		-f build/Dockerfile-client.dockerfile .
 
 run-img: build-img
 	docker run $(DOCKER_IMG)

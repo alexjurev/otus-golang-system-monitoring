@@ -17,10 +17,10 @@ type Config struct {
 }
 
 type Metric struct {
-	Cpu         *bool
-	LoadAverage *bool
-	DiskInfo    *bool
-	SpaceInfo   *bool
+	Cpu         bool
+	LoadAverage bool
+	DiskInfo    bool
+	SpaceInfo   bool
 }
 
 var ErrCollectorNotAvailable = errors.New("collector is not available")
@@ -28,25 +28,25 @@ var ErrCollectorNotAvailable = errors.New("collector is not available")
 func Load(config Config) ([]metric.Collector, error) {
 	var collectors []metric.Collector
 	var err error
-	if config.Collect.Cpu == nil || *config.Collect.Cpu {
+	if config.Collect.Cpu {
 		collectors, err = appendCollector(collectors, cpu.Collector{}, config.IgnoreUnavailable)
 		if err != nil {
 			return nil, err
 		}
 	}
-	if config.Collect.LoadAverage == nil || *config.Collect.LoadAverage {
+	if config.Collect.LoadAverage {
 		collectors, err = appendCollector(collectors, loadaverage.Collector{}, config.IgnoreUnavailable)
 		if err != nil {
 			return nil, err
 		}
 	}
-	if config.Collect.DiskInfo == nil || *config.Collect.DiskInfo {
+	if config.Collect.DiskInfo {
 		collectors, err = appendCollector(collectors, diskinfo.Collector{}, config.IgnoreUnavailable)
 		if err != nil {
 			return nil, err
 		}
 	}
-	if config.Collect.SpaceInfo == nil || *config.Collect.SpaceInfo {
+	if config.Collect.SpaceInfo {
 		collectors, err = appendCollector(collectors, spaceinfo.Collector{}, config.IgnoreUnavailable)
 		if err != nil {
 			return nil, err

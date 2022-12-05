@@ -32,20 +32,23 @@ func init() {
 func main() {
 	flag.Parse()
 
+	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer cancel()
+
 	avgInt, err := strconv.Atoi(avgInterval)
 	if err != nil {
 		fmt.Printf("incorrect parameter, intervals must be a number: %s", err)
+		cancel()
 	}
 	notifyInt, err := strconv.Atoi(notifyInterval)
 	if err != nil {
 		fmt.Printf("incorrect parameter, intervals must be a number: %s", err)
+		cancel()
 	}
-
-	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	defer cancel()
 
 	c := client.New(host, port)
 	if err := c.Start(ctx, metricName, avgInt, notifyInt); err != nil {
 		fmt.Printf("client failed: %s", err)
+		cancel()
 	}
 }

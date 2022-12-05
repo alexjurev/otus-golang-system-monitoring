@@ -56,7 +56,7 @@ func (c *Client) Start(ctx context.Context, groupName string, avgInterval int, n
 
 		found := false
 		for _, group := range response.GetGroups() {
-			if strings.EqualFold(group.GetName(), strings.ToLower(groupName)) {
+			if strings.EqualFold(group.GetName(), groupName) {
 				if err := c.printTable(group); err != nil {
 					return err
 				}
